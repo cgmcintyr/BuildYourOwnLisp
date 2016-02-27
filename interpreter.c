@@ -1,17 +1,27 @@
 #include <stdio.h>
+#include <stdlib.h>
 
-/* Declare a buffer for user input */
-static char input[2048];
+#include <editline/readline.h>
+#include <editline/history.h>
 
 int main(int argc, char** argv) {
     /* Print Version and Exit information */
-    puts("Lipsy Version 0.0.0.0.1");
+    puts("Mallow Version 0.0.0.0.1");
+    puts("Welcome, traveller");
     puts("Press Ctrl+c to Exit\n");
     /* Loop until keyboard interrupt */
     while(1) {
-        fputs("lispy> ", stdout);
-        fgets(input, 2048, stdin);
-        printf("No you're a %s", input);
+        /* Output prompt and get input */
+        char* input = readline("mallow> ");
+
+        /* Add input to history */
+        add_history(input);
+
+        /* Print input back to user */
+        printf("No you're a %s\n", input);
+
+        /* Free retrieved input */
+        free(input);
     }
     return 0;
 }
